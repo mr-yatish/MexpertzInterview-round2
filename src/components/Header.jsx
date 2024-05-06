@@ -1,35 +1,56 @@
-import { Container, Nav, Navbar, Button, Offcanvas } from "react-bootstrap"
+import React, { useState } from 'react';
+import { Navbar, Container, Nav, Button, Offcanvas } from 'react-bootstrap';
 
+const CustomNavbar = ({ details }) => {
+    const [showOffcanvas, setShowOffcanvas] = useState(false);
 
-const Header = ({ details }) => {
+    const toggleOffcanvas = () => {
+        setShowOffcanvas(!showOffcanvas);
+    };
+
     return (
-        <Navbar key={"md"} expand={"md"} variant="transparent" fixed="top" className="  mb-3 bg-transparent">
-            <Container >
-                <Navbar.Brand className=" text-white fw-bold fs-3" href="#">Brainly Lingo</Navbar.Brand>
-                <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} className="text-white" style={{ backgroundColor: '#1B7BE6', position: "absolute", right: "30px" }} />
-                <Navbar.Offcanvas
-                    id={`offcanvasNavbar-expand-md`}
-                    aria-labelledby={`offcanvasNavbarLabel-expand-md`}
-                    placement="end"
-                >
-                    <Offcanvas.Header closeButton>
-                        <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
-                            Brainly Lingo
-                        </Offcanvas.Title>
-                    </Offcanvas.Header>
-                    <Offcanvas.Body >
-                        <Nav className=" justify-content-end justify-content-lg-center  flex-grow-1 pe-3">
-                            <Nav.Link className="nav-link-custom text-white fs-5" href="#action1">Home</Nav.Link>
-                            <Nav.Link className="nav-link-custom text-white fs-5" href="#action2">Leadership</Nav.Link>
-                            <Nav.Link className="nav-link-custom text-white fs-5" href="#action3">Daily Quiz</Nav.Link>
-                            <Nav.Link className=" fs-5 fw-bold " style={{ color: "rgb(48, 48, 207)" }} href="#action4">Genre</Nav.Link>
-                        </Nav>
-                        <Button className={` ${details ? "btn-outline-custom-nav" : "btn-custom-gradient"}   rounded-5 px-4 py-1`} >{details ? "Sign Out " : "Sign in"}</Button>
-                    </Offcanvas.Body>
-                </Navbar.Offcanvas>
-            </Container>
-        </Navbar>
-    )
-}
+        <>
+            <Navbar key={"md"} expand={"md"} variant="transparent" fixed="top" className={details ? "mb-3 bg-gray " : "mb-3 bg-transparent "}>
+                {
+                    !showOffcanvas ?
+                        <Container style={{ position: 'relative' }} >
+                            <Navbar.Brand className="text-white fw-bold fs-3">Brainly Lingo</Navbar.Brand>
+                            <div className="d-flex align-items-center justify-content-between " style={{ width: '70%' }}>
+                                <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
+                                    <Nav className="me-auto gap-5">
+                                        <Nav.Link className="nav-link-custom text-white fs-5" href="#action1">Home</Nav.Link>
+                                        <Nav.Link className="nav-link-custom text-white fs-5" href="#action2">Leadership</Nav.Link>
+                                        <Nav.Link className="nav-link-custom text-white fs-5" href="#action2">Daily Quiz</Nav.Link>
+                                        <Nav.Link className=" fs-5 fw-bold " style={{ color: "rgb(48, 48, 207)" }} href="#action3">Genre</Nav.Link>
+                                    </Nav>
+                                    <Button style={{ background: "linear-gradient(90deg,#5B26C0,#2498C3" }} className={`rounded-5 px-4 py-1 ${details ? "btn-outline-custom-nav" : ""}`}>{details ? "Sign Out" : "Sign in"}</Button>
+                                </Navbar.Collapse>
+                            </div>
+                            <Navbar.Toggle aria-controls="responsive-navbar-nav" className="text-white" style={{ background: "linear-gradient(90deg,#5B26C0,#2498C3", position: 'absolute', top: '5', right: '0', borderRadius: "40px", border: 'none', outline: 'none', }} onClick={toggleOffcanvas} />
+                        </Container>
+                        :
+                        <Offcanvas show={showOffcanvas} onHide={toggleOffcanvas} placement="top" backdropClassName="bg-white" style={{ height: '50vh' }}>
+                            <Offcanvas.Header closeButton>
+                                <Offcanvas.Title>Brainly Lingo</Offcanvas.Title>
+                            </Offcanvas.Header>
+                            <Offcanvas.Body>
+                                <Nav className="flex-column">
 
-export default Header;
+                                    <Nav.Link className="nav-link-custom text-white fs-5" href="#action1">Home</Nav.Link>
+                                    <Nav.Link className="nav-link-custom text-white fs-5" href="#action2">Leadership</Nav.Link>
+                                    <Nav.Link className="nav-link-custom text-white fs-5" href="#action2">Daily Quiz</Nav.Link>
+                                    <Nav.Link className=" fs-5 fw-bold " style={{ color: "rgb(48, 48, 207)" }} href="#action3">Genre</Nav.Link>
+                                </Nav>
+
+                                <Button style={{ background: "linear-gradient(90deg,#5B26C0,#2498C3" }} className={`btn-custom-gradient rounded-5 px-4 py-1 ${details ? "btn-outline-custom-nav" : ""}`}>{details ? "Sign Out" : "Sign in"}</Button>
+                            </Offcanvas.Body>
+                        </Offcanvas>
+                }
+            </Navbar>
+
+
+        </>
+    );
+};
+
+export default CustomNavbar;

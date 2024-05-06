@@ -13,10 +13,10 @@ const StoreDetail = () => {
     const data = [
         {
             title: "World Explorer",
-            bgColor: "linear-gradient(90deg,rgb(48, 48, 207),rgb(11, 180, 248))"
+            bgColor: "linear-gradient(90deg,#5B26C0,#2498C3)"
         }, {
             title: "Story Adventure",
-            bgColor: "#2b2d48"
+            bgColor: "#2B2D49"
         }, {
             title: "Brain Quest",
             bgColor: "rgb(103, 255, 83)",
@@ -49,13 +49,12 @@ const StoreDetail = () => {
                 <div style={{ backgroundColor: "#060922" }} className=" position-absolute   w-100 h-100  ">
 
                 </div>
-                <h1 className=" py-5 mt-5 text-gradient-custom position-relative z-1 text-center fw-bold">{storyDetail?.Title ?? "lorem Lipsum tiltle"}</h1>
+                <h1 style={{ background: "linear-gradient(45deg,#5B26C0,#2498C3", backgroundClip: "text", WebkitBackgroundClip: "text", color: 'transparent' }} className=" py-5 mt-5  position-relative z-1 text-center fw-bold">{storyDetail?.Title ?? "lorem Lipsum tiltle"}</h1>
                 <h5 className="text-white"> {storyDetail?.Storyitext}</h5>
             </div>
 
             <div className=" container  py-5   z-1">
                 <div className="row  d-flex justify-content-around flex-wrap ">
-
                     {data.map((value, index) => {
                         return <div key={index} className="col col-sm-6 col-md-4">
                             <Batch {...value} />
